@@ -17,7 +17,7 @@ contract vulnerable {
     function withdraw(uint256 amount) public payable {
         require(amount <= Balances[msg.sender], "Asking for outside your balance");
         Storage -= amount;
-        Balances[msg.sender] -= amount;
+        Balances[msg.sender] -= amount;                          //State Variables are updated before executing the transaction
         (bool success, ) = (msg.sender).call{value:amount}("");
         require(success, "Transaction Failed");
     }
